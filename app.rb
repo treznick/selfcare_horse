@@ -5,10 +5,10 @@ require 'sinatra/subdomain'
 require 'active_support/all'
 
 class SubDomain
-  attr_reader :name, :duration, :self_care
-  def initialize(name:, duration:, self_care:)
+  attr_reader :name, :humanized_duration, :self_care
+  def initialize(name:, humanized_duration:, self_care:)
     @name = name
-    @duration = duration
+    @humanized_duration = humanized_duration
     @self_care = self_care
   end
 
@@ -23,7 +23,7 @@ end
 
 SUBDOMAINS = {
   "five.minute" => SubDomain.new(name: "five.minute",
-                                 duration: "five minutes", 
+                                 humanized_duration: "five minutes", 
                                  self_care: [
                                    "Touching plants is good for you. Go weed the garden",
                                    "Throw a ball with your dog",
@@ -38,7 +38,7 @@ SUBDOMAINS = {
                                  ]
                                 ),
   "ten.minute" => SubDomain.new(name: "ten.minute",
-                                 duration: "ten minutes", 
+                                 humanized_duration: "ten minutes", 
                                  self_care: [
                                    "Touching plants is good for you. Go weed the garden",
                                    "Throw a ball with your dog",
@@ -70,6 +70,6 @@ def locals(sub_domain)
   {
     self_care: sub_domain.sample_self_care,
     humanized_subdomain: sub_domain.humanized,
-    duration: sub_domain.duration
+    humanized_duration: sub_domain.humanized_duration
   }
 end
